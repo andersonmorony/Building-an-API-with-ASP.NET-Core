@@ -20,12 +20,20 @@ namespace Agend.Repository
 
         public async Task<AgendsModel> GetAgendAsync(string name)
         {
-            return await _context.Agends.FirstOrDefaultAsync(a => a.People.Firstname == name);
+            return await _context.Agends
+                .Include(p => p.People)
+                .Include(a => a.ServiceType)
+                .Where(w => w.People.Firstname.Contains(name) || w.People.Lastname.Contains(name))
+                .FirstOrDefaultAsync();
+                
         }
 
         public async Task<IEnumerable<AgendsModel>> GetAgendsAsync()
         {
-            return await _context.Agends.ToListAsync();
+            return await _context.Agends
+                .Include(p => p.People)
+                .Include(a => a.ServiceType)
+                .ToListAsync();
         }
     }
 }

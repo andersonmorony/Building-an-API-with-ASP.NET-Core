@@ -25,17 +25,36 @@ namespace Agend.Controllers
         {
             try
             {
-                var agends = await _agendService.GetAgendsAsync();
+                var result = await _agendService.GetAgendsAsync();
 
-                if(agends.IsSuccess)
+                if(result.IsSuccess)
                 {
-                    return Ok(agends);
+                    return Ok(result.agendModels);
                 }
                 return BadRequest(null);
             }
             catch (Exception ex)
             {
                 return BadRequest(ex);
+            }
+        }
+
+        [HttpGet("{peopleName}")]
+        public async Task<ActionResult<AgendViewModel>> GetAgend(string peopleName)
+        {
+            try
+            {
+                var result = await _agendService.GetAgendAsync(peopleName);
+
+                if(result.IsSuccess)
+                {
+                    return result.agendModel;
+                }
+                return NotFound();
+            }
+            catch (Exception)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, "Database Error");
             }
         }
 

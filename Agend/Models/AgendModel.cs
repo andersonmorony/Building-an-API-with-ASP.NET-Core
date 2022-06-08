@@ -9,8 +9,10 @@ namespace Agend.Models
     {
         public int Id { get; set; }
         public PeopleModel People { get; set; }
+        public int PeopleId { get; set; }
         public DateTime Day { get; set; }
         public ServiceTypeModel ServiceType { get; set; }
+        public int ServiceTypeId { get; set; }
 
     }
 }

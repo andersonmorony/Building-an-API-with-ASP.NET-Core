@@ -10,6 +10,7 @@ namespace Agend.ViewModel
     {
         public PeopleModel People { get; set; }
         public DateTime Day { get; set; }
-        public ServiceTypeModel ServiceType { get; set; }
+        public string Service { get; set; }
+        public string ServiceStatus { get; set; }
     }
 }
