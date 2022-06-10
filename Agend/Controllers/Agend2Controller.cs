@@ -10,23 +10,22 @@ using System.Threading.Tasks;
 
 namespace Agend.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/agend")]
     [ApiController]
-    [ApiVersion("1.0")]
-    [ApiVersion("1.1")]
-    public class AgendController : ControllerBase
+    [ApiVersion("2.0")]
+    public class Agend2Controller : ControllerBase
     {
         private readonly IAgendService _agendService;
         private readonly LinkGenerator _linkGenerator;
 
-        public AgendController(IAgendService agendService, LinkGenerator linkGenerator)
+        public Agend2Controller(IAgendService agendService, LinkGenerator linkGenerator)
         {
             _agendService = agendService;
             _linkGenerator = linkGenerator;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AgendViewModel>>> GetAgends()
+        public async Task<ActionResult> GetAgends()
         {
             try
             {
@@ -34,7 +33,11 @@ namespace Agend.Controllers
 
                 if(result.IsSuccess)
                 {
-                    return Ok(result.agendModels);
+                    var newResult = new {
+                        items = result.agendModels,
+                        count = result.agendModels.Count()
+                    };
+                    return Ok(newResult);
                 }
                 return BadRequest(null);
             }
@@ -45,7 +48,6 @@ namespace Agend.Controllers
         }
 
         [HttpGet("{id:int}")]
-        [MapToApiVersion("1.1")]
         public async Task<ActionResult<AgendViewModel>> GetAgend(int id)
         {
             try

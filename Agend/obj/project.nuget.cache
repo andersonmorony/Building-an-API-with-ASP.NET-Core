@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "zC6BIIcAh2k1ZIe4bTpBYBr+iJNvrPxO1uihh1eOeic/r/xLV6nfKOOQ0nl20f5UyyeAEdJa9yceSZC7aJUDhQ==",
+  "dgSpecHash": "Em9IcfuuFqW/PeZsYInhnDltWtYHRFWf+j9xnjuzRIwQ8i+pFSMbCU0THzXlq10/4SK9v//P89jyscjIW4cZPw==",
   "success": true,
   "projectFilePath": "C:\\Users\\a.de.souza.ramos\\source\\repos\\Agend\\Agend\\Agend.csproj",
   "expectedPackageFiles": [
@@ -9,6 +9,7 @@
     "C:\\Users\\a.de.souza.ramos\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\a.de.souza.ramos\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\5.0.1\\microsoft.aspnetcore.authentication.jwtbearer.5.0.1.nupkg.sha512",
     "C:\\Users\\a.de.souza.ramos\\.nuget\\packages\\microsoft.aspnetcore.authentication.openidconnect\\5.0.1\\microsoft.aspnetcore.authentication.openidconnect.5.0.1.nupkg.sha512",
+    "C:\\Users\\a.de.souza.ramos\\.nuget\\packages\\microsoft.aspnetcore.mvc.versioning\\5.0.0\\microsoft.aspnetcore.mvc.versioning.5.0.0.nupkg.sha512",
     "C:\\Users\\a.de.souza.ramos\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\a.de.souza.ramos\\.nuget\\packages\\microsoft.data.sqlclient\\2.0.1\\microsoft.data.sqlclient.2.0.1.nupkg.sha512",
     "C:\\Users\\a.de.souza.ramos\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.0.1\\microsoft.data.sqlclient.sni.runtime.2.0.1.nupkg.sha512",

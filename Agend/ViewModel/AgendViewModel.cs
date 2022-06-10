@@ -12,5 +12,6 @@ namespace Agend.ViewModel
         public DateTime Day { get; set; }
         public string Service { get; set; }
         public string ServiceStatus { get; set; }
+        public int SeriveTypeId { get; set; }
     }
 }

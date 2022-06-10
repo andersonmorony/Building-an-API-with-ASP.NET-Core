@@ -15,9 +15,10 @@ namespace Agend.Profiles
         {
             CreateMap<AgendsModel, AgendViewModel>()
                 .ForMember(d => d.Service, o => o.MapFrom(m => m.ServiceType.Name))
-                .ForMember(s => s.ServiceStatus, m => m.MapFrom(d => d.ServiceType.IsActive));
-            CreateMap<AgendViewModel, AgendsModel>();
-            CreateMap<AgendCreateViewModel, AgendsModel>();
+                .ForMember(s => s.ServiceStatus, m => m.MapFrom(d => d.ServiceType.IsActive))
+                .ReverseMap();
+            CreateMap<AgendCreateViewModel, AgendsModel>()
+                .ReverseMap();
         }
     }
 }

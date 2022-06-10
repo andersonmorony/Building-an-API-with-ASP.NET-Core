@@ -18,6 +18,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Agend.IServices;
 using Agend.Services;
+using Microsoft.AspNetCore.Mvc.Versioning;
 
 namespace Agend
 {
@@ -39,6 +40,15 @@ namespace Agend
             services.AddScoped<IPeopleRepository, PeopleRepository>();
 
             services.AddAutoMapper(typeof(Startup));
+
+            services.AddApiVersioning(options =>
+            {
+                options.ApiVersionReader = new HeaderApiVersionReader("x-version");
+                //options.ApiVersionReader = new QueryStringApiVersionReader("ver");
+                options.AssumeDefaultVersionWhenUnspecified = true;
+                options.DefaultApiVersion = new ApiVersion(1, 1);
+                options.ReportApiVersions = true;
+            });
 
             services.AddControllers();
             services.AddDbContext<AppDbContext>(options =>

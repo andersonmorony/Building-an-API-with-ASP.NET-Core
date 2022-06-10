@@ -64,3 +64,4 @@ C:\Users\a.de.souza.ramos\source\repos\Agend\Agend\bin\Debug\net5.0\Microsoft.Ex
 C:\Users\a.de.souza.ramos\source\repos\Agend\Agend\bin\Debug\net5.0\Microsoft.Extensions.Options.dll
 C:\Users\a.de.souza.ramos\source\repos\Agend\Agend\bin\Debug\net5.0\Microsoft.Extensions.Primitives.dll
 C:\Users\a.de.souza.ramos\source\repos\Agend\Agend\bin\Debug\net5.0\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\a.de.souza.ramos\source\repos\Agend\Agend\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.Versioning.dll
