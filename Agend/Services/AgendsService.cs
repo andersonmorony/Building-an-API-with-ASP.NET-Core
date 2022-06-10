@@ -20,11 +20,27 @@ namespace Agend.Services
             _agendRepository = agendRepository;
             _mapper = mapper;
         }
-        public async Task<(AgendViewModel agendModel, bool IsSuccess, string MsgError)> GetAgendAsync(string name)
+
+        public async Task<(int agendId, bool IsSuccess, string MsgError)> CreateAgend(AgendCreateViewModel model)
         {
             try
             {
-                var agend = await _agendRepository.GetAgendAsync(name);
+                var agendMapped =  _mapper.Map<AgendCreateViewModel, AgendsModel>(model);
+                var agendId = await _agendRepository.CreateAgend(agendMapped);
+
+                return (agendId, true, null);
+            }
+            catch (Exception ex)
+            {
+                return (0, false, ex.Message);
+            }
+        }
+
+        public async Task<(AgendViewModel agendModel, bool IsSuccess, string MsgError)> GetAgendAsync(int id)
+        {
+            try
+            {
+                var agend = await _agendRepository.GetAgendAsync(id);
 
                 if(agend != null)
                 {
@@ -56,6 +72,26 @@ namespace Agend.Services
             {
                 return (null, false, ex.Message);
             }
+        }
+
+        public async Task<(AgendViewModel agend, bool IsSuccess, string MsgError)> PutAgent(int id, AgendViewModel model)
+        {
+           try
+            {
+                var newModel = _mapper.Map<AgendViewModel, AgendsModel>(model);
+
+                var agend = await _agendRepository.PutAgent(id, newModel);
+
+                var newAgend = _mapper.Map<AgendsModel, AgendViewModel>(agend);
+
+                return (newAgend, true, null);
+
+            } catch(Exception ex)
+            {
+                return (null, false, ex.Message);
+            }
+
+
         }
     }
 }

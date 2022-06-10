@@ -36,6 +36,7 @@ namespace Agend
 
             services.AddScoped<IAgendService, AgendsService>();
             services.AddScoped<IAgendRepository, AgendRepository>();
+            services.AddScoped<IPeopleRepository, PeopleRepository>();
 
             services.AddAutoMapper(typeof(Startup));
 

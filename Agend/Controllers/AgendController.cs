@@ -2,6 +2,7 @@
 using Agend.ViewModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,10 +15,12 @@ namespace Agend.Controllers
     public class AgendController : ControllerBase
     {
         private readonly IAgendService _agendService;
+        private readonly LinkGenerator _linkGenerator;
 
-        public AgendController(IAgendService agendService)
+        public AgendController(IAgendService agendService, LinkGenerator linkGenerator)
         {
             _agendService = agendService;
+            _linkGenerator = linkGenerator;
         }
 
         [HttpGet]
@@ -39,12 +42,12 @@ namespace Agend.Controllers
             }
         }
 
-        [HttpGet("{peopleName}")]
-        public async Task<ActionResult<AgendViewModel>> GetAgend(string peopleName)
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<AgendViewModel>> GetAgend(int id)
         {
             try
             {
-                var result = await _agendService.GetAgendAsync(peopleName);
+                var result = await _agendService.GetAgendAsync(id);
 
                 if(result.IsSuccess)
                 {
@@ -55,6 +58,50 @@ namespace Agend.Controllers
             catch (Exception)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError, "Database Error");
+            }
+        }
+        [HttpPost]
+        public async Task<ActionResult<AgendViewModel>> CreateAgend(AgendCreateViewModel model)
+        {
+            try
+            {
+                var result = await _agendService.CreateAgend(model);
+                var linkGenerate = _linkGenerator.GetPathByAction("GetAgend", "Agend", new { id = result.agendId });
+
+                if(result.IsSuccess)
+                {
+                    var agend = await _agendService.GetAgendAsync(result.agendId);
+                    return Created(linkGenerate, agend.agendModel);
+                }
+                return BadRequest();
+
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<AgendViewModel>> Put(int id, AgendViewModel model)
+        {
+            try
+            {
+                var agend = await _agendService.GetAgendAsync(id);
+
+                if (!agend.IsSuccess) return NotFound();
+
+                var result = await _agendService.PutAgent(id, model);
+
+                if (result.IsSuccess)
+                {
+                    return result.agend;
+                }
+                return BadRequest();
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
 
